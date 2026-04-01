@@ -853,4 +853,16 @@ function submitForm(lang) {
   const role = activeRole ? activeRole.dataset.role : 'employer';
 
   // Log lead (replace with real endpoint later)
-  console.log('📩 HireBase Lead:', { name, email, 
+  console.log('📩 HireBase Lead:', { name, email, company, role, lang: currentLang });
+
+  // Hide form, show success
+  const formId = lang === 'en' ? 'formEN' : 'formEL';
+  const successId = lang === 'en' ? 'successEN' : 'successEL';
+  document.getElementById(formId).style.display = 'none';
+  const successEl = document.getElementById(successId);
+  successEl.style.display = 'block';
+  successEl.classList.add('show');
+}
+</script>
+</body>
+</html>
