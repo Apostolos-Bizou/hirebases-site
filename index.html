@@ -416,24 +416,123 @@ body {
 }
 .footer-links a:hover { color:var(--gray-300); }
 
+/* ═══ HAMBURGER ═══ */
+.hamburger {
+  display:none; flex-direction:column; gap:5px;
+  background:none; border:none; cursor:pointer; padding:6px;
+  -webkit-tap-highlight-color:transparent;
+}
+.hamburger span {
+  display:block; width:22px; height:2px;
+  background:var(--gray-300); border-radius:2px;
+  transition: all 0.3s ease;
+}
+.hamburger.open span:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+.hamburger.open span:nth-child(2) { opacity:0; }
+.hamburger.open span:nth-child(3) { transform:rotate(-45deg) translate(5px,-5px); }
+
+/* ═══ MOBILE MENU ═══ */
+.mobile-menu {
+  display:none; position:fixed;
+  top:64px; left:0; right:0; bottom:0;
+  background:rgba(15,23,42,0.98);
+  backdrop-filter:blur(24px);
+  -webkit-backdrop-filter:blur(24px);
+  z-index:99; padding:24px;
+  flex-direction:column; gap:0;
+  animation: mobileSlide 0.3s ease;
+}
+.mobile-menu.open { display:flex; }
+@keyframes mobileSlide {
+  from { opacity:0; transform:translateY(-8px); }
+  to { opacity:1; transform:translateY(0); }
+}
+.mobile-menu a {
+  display:block; font-size:17px; font-weight:500;
+  color:var(--gray-300); text-decoration:none;
+  padding:18px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  transition:color 0.2s;
+}
+.mobile-menu a:hover { color:var(--white); }
+.mobile-menu .btn-mobile-cta {
+  display:block; margin-top:24px; padding:16px;
+  background:var(--blue); color:var(--white);
+  font-size:15px; font-weight:700; font-family:var(--font-body);
+  border:none; border-radius:var(--radius-md);
+  cursor:pointer; text-align:center; text-decoration:none;
+  transition:background 0.2s;
+}
+.mobile-menu .btn-mobile-cta:hover { background:var(--blue-hover); }
+
 /* ═══ MOBILE ═══ */
 @media(max-width:768px) {
-  .nav-inner { padding:0 20px; }
-  .nav-right { gap:12px; }
+  .nav-inner { padding:0 16px; height:64px; }
+  .nav-logo svg { width:30px; height:30px; }
+  .nav-wordmark { font-size:19px; }
+  .nav-right { gap:10px; }
   .nav-link { display:none; }
-  .hero { padding:100px 20px 60px; }
-  .hero h1 { font-size:34px; letter-spacing:-1px; }
-  .value-strip { flex-direction:column; gap:16px; align-items:center; }
-  .reg-card { padding:28px 24px; margin:0 4px; }
+  .btn-nav { display:none; }
+  .hamburger { display:flex; }
+  .lang-toggle { order:-1; }
+  .lang-btn { padding:5px 11px; font-size:11px; }
+
+  .hero { padding:90px 20px 48px; min-height:auto; }
+  .hero h1 { font-size:32px; letter-spacing:-0.8px; margin-bottom:18px; }
+  .hero-sub { font-size:15px; margin-bottom:32px; line-height:1.65; }
+  .hero-badge { font-size:13px; padding:7px 18px; margin-bottom:24px; }
+
+  .value-strip {
+    flex-direction:column; gap:12px;
+    align-items:stretch; margin-bottom:40px;
+    padding:0 4px;
+  }
+  .value-item {
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.07);
+    border-radius:var(--radius-md);
+    padding:14px 18px;
+    gap:12px;
+  }
+  .value-icon {
+    width:40px; height:40px; min-width:40px;
+    border-radius:10px; font-size:17px;
+  }
+
+  .reg-card {
+    padding:28px 20px; margin:0;
+    border-radius:var(--radius-lg);
+  }
+  .reg-title { font-size:18px; }
+  .reg-sub { font-size:13px; margin-bottom:22px; }
+  .role-selector { gap:6px; margin-bottom:20px; }
+  .role-btn { padding:11px 12px; font-size:13px; }
+  .form-label { font-size:12px; }
+  .form-input { padding:11px 14px; font-size:14px; }
   .form-row { grid-template-columns:1fr; }
-  .contact { padding:60px 20px 40px; }
-  .contact-cards { grid-template-columns:1fr; }
-  .footer-inner { flex-direction:column; gap:16px; }
+  .btn-submit { padding:13px 20px; font-size:14px; }
+  .form-note { font-size:11px; }
+
+  .contact { padding:56px 20px 40px; }
+  .contact-heading { font-size:24px; }
+  .contact-sub { font-size:14px; margin-bottom:24px; }
+  .contact-cards { grid-template-columns:1fr; gap:10px; }
+  .contact-card { padding:20px 16px; }
+
+  .footer { padding:24px 20px; }
+  .footer-inner { flex-direction:column; gap:14px; }
+  .footer-copy { font-size:12px; }
+  .footer-links { gap:16px; }
+  .footer-links a { font-size:12px; }
 }
-@media(max-width:480px) {
-  .hero h1 { font-size:28px; }
-  .hero-sub { font-size:15px; }
-  .lang-toggle { display:flex; }
+
+@media(max-width:380px) {
+  .hero h1 { font-size:27px; letter-spacing:-0.6px; }
+  .hero-sub { font-size:14px; }
+  .nav-wordmark { font-size:17px; }
+  .reg-card { padding:24px 16px; }
+  .role-btn { font-size:12px; padding:10px 8px; }
+  .value-item span { font-size:13px; }
 }
 
 /* ═══ HIDE CLASSES ═══ */
@@ -441,6 +540,10 @@ body {
 [data-lang].show { display:block; }
 .value-item[data-lang] { display:none; }
 .value-item[data-lang].show { display:flex; }
+.hero-badge[data-lang].show { display:inline-flex; }
+.btn-nav[data-lang].show { display:inline-flex; }
+.mobile-menu a[data-lang] { display:none; }
+.mobile-menu a[data-lang].show { display:block; }
 </style>
 </head>
 <body>
@@ -472,9 +575,20 @@ body {
       </div>
       <a href="#register" class="btn-nav" data-lang="en">Register Interest</a>
       <a href="#register" class="btn-nav" data-lang="el">Εγγραφή</a>
+      <button class="hamburger" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </nav>
+
+<!-- ═══ MOBILE MENU ═══ -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#contact" onclick="closeMobileMenu()" data-lang="en">Contact</a>
+  <a href="#contact" onclick="closeMobileMenu()" data-lang="el">Επικοινωνία</a>
+  <a href="#register" class="btn-mobile-cta" onclick="closeMobileMenu()" data-lang="en">Register Interest</a>
+  <a href="#register" class="btn-mobile-cta" onclick="closeMobileMenu()" data-lang="el">Εγγραφή</a>
+</div>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="hero">
@@ -623,7 +737,7 @@ body {
       <div class="contact-card">
         <div class="cc-icon">✉</div>
         <h4>Email</h4>
-        <p><a href="mailto:info@hirebase.eu">info@hirebase.eu</a></p>
+        <p><a href="/cdn-cgi/l/email-protection#a8c1c6cec7e8c0c1dacdcac9dbcd86cddd"><span class="__cf_email__" data-cfemail="cea7a0a8a18ea6a7bcabacafbdabe0abbb">[email&#160;protected]</span></a></p>
       </div>
       <div class="contact-card">
         <div class="cc-icon">📍</div>
@@ -656,7 +770,7 @@ body {
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ═══ LANGUAGE TOGGLE ═══
 let currentLang = 'en';
 
@@ -672,6 +786,23 @@ function setLang(lang) {
   });
   // Update HTML lang
   document.documentElement.lang = lang === 'en' ? 'en' : 'el';
+}
+
+// ═══ MOBILE MENU ═══
+function toggleMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const hamburger = document.querySelector('.hamburger');
+  const isOpen = menu.classList.contains('open');
+  menu.classList.toggle('open');
+  hamburger.classList.toggle('open');
+  document.body.style.overflow = isOpen ? '' : 'hidden';
+}
+function closeMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  const hamburger = document.querySelector('.hamburger');
+  menu.classList.remove('open');
+  hamburger.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 // Init
@@ -722,14 +853,4 @@ function submitForm(lang) {
   const role = activeRole ? activeRole.dataset.role : 'employer';
 
   // Log lead (replace with real endpoint later)
-  console.log('📩 HireBase Lead:', { name, email, company, role, lang });
-
-  // Show success
-  formContainer.style.display = 'none';
-  const successId = lang === 'en' ? 'successEN' : 'successEL';
-  document.getElementById(successId).style.display = 'block';
-}
-</script>
-
-</body>
-</html>
+  console.log('📩 HireBase Lead:', { name, email, 
